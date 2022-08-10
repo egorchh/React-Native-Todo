@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Button, Alert } from "react-native";
+import { StyleSheet, View, Alert, Dimensions } from "react-native";
 import { EditModal } from "../components/EditModal";
 import { AppCard } from "../components/ui/AppCard";
 import { THEME } from "../theme";
@@ -28,7 +28,9 @@ export const TodoScreen = ({ goBack, todo, removeTodo }) => {
       />
 
       <AppCard style={styles.card}>
-        <AppTextBold style={styles.title}>{todo.title}</AppTextBold>
+        <View style={styles.textWrapper}>
+          <AppTextBold style={styles.title}>{todo.title}</AppTextBold>
+        </View>
         <AppButton color={THEME.MAIN_COLOR} onPress={() => setModal(true)}>
           <FontAwesome name="edit" size={20} />
         </AppButton>
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   button: {
-    width: "48%",
+    width: Dimensions.get("window").width / 2.5,
   },
   editButton: {},
   title: {
@@ -70,5 +72,8 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 20,
     marginTop: 10,
+  },
+  textWrapper: {
+    maxWidth: "80%",
   },
 });
