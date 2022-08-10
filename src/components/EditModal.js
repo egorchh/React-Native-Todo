@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Modal, StyleSheet, Text } from "react-native";
 import { THEME } from "../theme";
+import { AppText } from "./ui/AppText";
+import { AppButton } from "./ui/AppButton";
+import { AntDesign } from "@expo/vector-icons";
 
 export const EditModal = ({ visible, closeModal, onChange }) => {
   const [title, setTitle] = useState("");
@@ -8,7 +11,7 @@ export const EditModal = ({ visible, closeModal, onChange }) => {
   return (
     <Modal visible={visible}>
       <View style={styles.wrap}>
-        <Text style={styles.title}>Edit target name</Text>
+        <AppText style={styles.title}>Edit target name</AppText>
         <View style={styles.input}>
           <TextInput
             onChangeText={setTitle}
@@ -20,16 +23,19 @@ export const EditModal = ({ visible, closeModal, onChange }) => {
         </View>
         <View style={styles.buttons}>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={closeModal} />
+            <AppButton color={THEME.GRAY_COLOR} onPress={closeModal}>
+              <AntDesign name="back" size={20} color="#fff" />
+            </AppButton>
           </View>
           <View style={styles.button}>
-            <Button
-              title="Save settings"
+            <AppButton
               onPress={() => {
                 onChange(title);
                 closeModal();
               }}
-            />
+            >
+              Save
+            </AppButton>
           </View>
         </View>
       </View>
