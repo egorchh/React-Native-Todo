@@ -3,7 +3,7 @@ import { View, TextInput, Button, Modal, StyleSheet, Text } from "react-native";
 import { THEME } from "../theme";
 
 export const EditModal = ({ visible, closeModal, onChange }) => {
-  const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
 
   return (
     <Modal visible={visible}>
@@ -11,8 +11,8 @@ export const EditModal = ({ visible, closeModal, onChange }) => {
         <Text style={styles.title}>Edit target name</Text>
         <View style={styles.input}>
           <TextInput
-            onChangeText={setValue}
-            value={value}
+            onChangeText={setTitle}
+            value={title}
             placeholder="Write new name..."
             autoCorrect={false}
             autoCapitalize="none"
@@ -26,7 +26,7 @@ export const EditModal = ({ visible, closeModal, onChange }) => {
             <Button
               title="Save settings"
               onPress={() => {
-                onChange(value);
+                onChange(title);
                 closeModal();
               }}
             />

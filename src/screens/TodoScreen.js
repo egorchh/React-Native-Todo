@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Alert } from "react-native";
 import { EditModal } from "../components/EditModal";
 import { AppCard } from "../components/ui/AppCard";
 import { THEME } from "../theme";
@@ -8,7 +8,12 @@ export const TodoScreen = ({ goBack, todo, removeTodo }) => {
   const [modal, setModal] = useState(false);
 
   const changeName = (input) => {
-    todo.title = input;
+    if (input.trim().length < 3) {
+      setModal(true);
+      Alert.alert("Error", "The minimum string length is 3 characters.");
+    } else {
+      todo.title = input;
+    }
   };
 
   return (
@@ -50,6 +55,7 @@ const styles = StyleSheet.create({
   button: {
     width: "48%",
   },
+  editButton: {},
   title: {
     fontSize: 18,
   },
