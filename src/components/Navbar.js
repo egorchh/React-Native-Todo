@@ -5,22 +5,51 @@ import { AppText } from "./ui/AppText";
 
 export const Navbar = ({ title }) => {
   return (
-    <View style={styles.navbar}>
-      <AppText style={styles.text}>{title}</AppText>
+    <View
+      style={{
+        ...styles.navbar,
+        ...Platform.select({
+          ios: styles.navbarIos,
+          android: styles.navbarAndroid,
+        }),
+      }}
+    >
+      <AppText
+        style={{
+          ...styles.text,
+          ...Platform.select({
+            ios: styles.textIos,
+            android: styles.textAndroid,
+          }),
+        }}
+      >
+        {title}
+      </AppText>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   navbar: {
-    height: 70,
+    height: 80,
     alignItems: "center",
     justifyContent: "flex-end",
-    backgroundColor: THEME.MAIN_COLOR,
     paddingBottom: 10,
   },
+  navbarAndroid: {
+    backgroundColor: THEME.MAIN_COLOR,
+  },
+  navbarIos: {
+    borderBottomColor: THEME.MAIN_COLOR,
+    borderBottomWidth: 1,
+  },
   text: {
-    color: "white",
     fontSize: 20,
+  },
+  textAndroid: {
+    color: "#fff",
+  },
+  textIos: {
+    color: THEME.MAIN_COLOR,
   },
 });
